@@ -13,9 +13,9 @@ function App() {
     <div className="container">
       <Header/>
       <Routes>
-        <Route path="/" index element={<Dashboard/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/" index exact element={<Dashboard/>}/>
+        <Route path="/login" exact element={<Login/>}/>
+        <Route path="/register" exact element={<Register/>}/>
       </Routes>
     </div>
     </Router>
