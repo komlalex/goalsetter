@@ -34,24 +34,22 @@ const setGoal = asyncHandler( async (req, res) => {
 //@route PUT api/goals/:id
 //@access Private
 const updateGoal = asyncHandler( async (req, res) => { 
+    const {text} = req.body;
+    //Make sure valid text field is provided
+    if (!text || !text.trim()) {
+        throw new Error("Please fill text field");
+    }
 
     const goal = await Goal.findById(req.params.id);
 
+    //Make sure goal exists
     if (!goal) {
         res.status(404);
         throw new Error("Goal not found")
     }
-
-    //Check if user exists
-    const user = await User.findById(req.user.id);
-
-    if (!user) {
-        res.status(401);
-        throw new Error("Not authorized")
-    }
     
     //Make sure the logged in user matches the goal user
-    if (goal.user.toString() !== user.id) {
+    if (goal.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error("User Not Authorized");
     }  
@@ -72,17 +70,9 @@ const deleteGoal = asyncHandler ( async (req, res) => {
         res.status(404);
         throw new Error ("Goal Not Found!!!")
     }
-
-    //Check if user exists
-    const user = await User.findById(req.user.id);
-
-    if (!user) {
-        res.status(401);
-        throw new Error("Not authorized")
-    }
     
     //Make sure the logged in user matches the goal user
-    if (goal.user.toString() !== user.id) {
+    if (goal.user.toString() !== req.user.id) {
         res.status(401);
         throw new Error("User Not Authorized");
     }
