@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setGoal } from "../features/goals/goalSlice";
 import {toast} from "react-toastify";
 
+
 function GoalForm() {
     const dispatch = useDispatch();
+    const {isSuccess} = useSelector((state) => state.goal)
     const [text, setText] = useState("");
 
     const onSubmit = (e) => {
@@ -12,14 +14,20 @@ function GoalForm() {
         
         if (!text || !text.trim()) {
             toast.error("Text field is empty");
+            return;
         } else {
             dispatch(setGoal({text}));
-        setText("");
+            setText("");
+        }
+
+        if (isSuccess) {
+            toast.success("Goal set successfully!!!")
         }
         
     }
+    
   return (
-    <section className="form">
+    <section className="form" id="#form">
         <form onSubmit={onSubmit}>
             <div className="form-group">
             <label htmlFor="goal">Goal</label>
