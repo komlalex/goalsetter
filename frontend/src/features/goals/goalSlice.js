@@ -33,8 +33,9 @@ export const updateGoal = createAsyncThunk("goal/update", async (goalData, thunk
     }
 })
 export const getGoals = createAsyncThunk("goal/getAll",async (_,thunkAPI) => {
+    let token;
     try {
-        const token = thunkAPI.getState().auth.user.token;
+        token = thunkAPI.getState().auth.user.token;
         return await goalService.getGoals(token);
     } catch (err) {
         const message = (err.response && err.response.data && err.response.data.message) ||
@@ -116,7 +117,7 @@ export const authSlice = createSlice({
         .addCase(updateGoal.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isError = false;
-            state.isSuccess = true;
+            state.isSuccess = true;         
 
             state.goals = state.goals.map ((goal) => {
                 if (goal._id  === action.payload._id) { 

@@ -4,7 +4,7 @@ import {useSelector, useDispatch} from "react-redux";
 import GoalForm from "../components/GoalForm";
 import GoalItem from "../components/GoalItem";
 import Spinner from "../components/Spinner";
-import {toast} from "react-toastify";
+//import {toast} from "react-toastify";
 import { getGoals, reset } from "../features/goals/goalSlice";
 function Dashboard() {
   const navigate = useNavigate();
@@ -12,12 +12,14 @@ function Dashboard() {
 
   const {goals, isLoading, isError, message} = useSelector((state) => state.goal)
   const {user}  = useSelector((state) => state.auth);
-  
 
+  
   useEffect(() => {
+
     if (isError) {
-      toast.error(message);
+      console.log(message);
     }
+  
     if (!user) {
       navigate("/login")
     }

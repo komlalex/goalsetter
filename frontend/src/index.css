@@ -108,6 +108,32 @@ h3 {
   background: none;
 }
 
+.goal .edit {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.goal .modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.95);
+  z-index: 3000;
+}
+.goal .modal .close {
+  font-size: 1.5rem;
+}
+.goal .hide {
+  display: none;
+}
+
 .form,
 .content {
   width: 70%;

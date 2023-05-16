@@ -27,7 +27,7 @@ function GoalForm() {
     }
     
   return (
-    <section className="form" id="#form">
+    <section className="form">
         <form onSubmit={onSubmit}>
             <div className="form-group">
             <label htmlFor="goal">Goal</label>
